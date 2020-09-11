@@ -13,7 +13,7 @@ export const vueSfcMiddleware = (app: Koa): void => {
         
         ctx.body = 
           `import { render as __render } from "${ctx.path}?type=template"\n` +
-          `${code?.replace(/export\s+default\s+/, 'const __script = ')} \n` +
+          `${CompilerSfc.rewriteDefault(code!, '__script')} \n` +
           '__script.render = __render \n' +
           'export default __script'
       } else if (ctx.query.type === 'template') {
